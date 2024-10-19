@@ -164,10 +164,8 @@ Current Game Board:
 
 ## **Future Improvements**
 
-1. **Add Replay Feature:** Allow players to start a new game without restarting the program.
-2. **Input Validation:** Handle non-integer inputs gracefully.
-3. **Score Tracking:** Implement a system to track wins for each player across multiple games.
-4. **AI Opponent:** Add an AI opponent for single-player mode.
+1. **Score Tracking:** Implement a system to track wins for each player across multiple games.
+2. **AI Opponent:** Add an AI opponent for single-player mode.
 
 ---
 
