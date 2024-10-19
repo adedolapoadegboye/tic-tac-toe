@@ -10,7 +10,6 @@ This is a **simple two-player Tic-Tac-Toe game** implemented in C. Players take 
 - [How to Play](#how-to-play)
 - [Code Structure](#code-structure)
 - [Example Output](#example-output)
-- [Known Issues](#known-issues)
 - [Future Improvements](#future-improvements)
 
 ---
@@ -184,7 +183,6 @@ If you'd like to contribute:
 3. Commit your changes: `git commit -m "Add feature"`.
 4. Push to the branch: `git push origin feature-branch`.
 5. Open a pull request.
-
 
 ---
 
