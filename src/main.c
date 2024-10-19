@@ -8,28 +8,42 @@
 #define TOTAL_SLOTS 9
 
 // Game variables
-char player1[20]; // Player 1 name
-char player2[20]; // Player 2 name
-char gameBoard[BOARD_SIZE][BOARD_SIZE] = {
-    {'1', '2', '3'},
-    {'4', '5', '6'},
-    {'7', '8', '9'}};
+char player1[20];                       // Player 1 name
+char player2[20];                       // Player 2 name
+char gameBoard[BOARD_SIZE][BOARD_SIZE]; // Game board
 
 // Function prototypes
 void gameInit();
 void drawGameBoard();
 void playGame();
+void resetGameBoard(); // Reset the board for replay
 int playerTurn(int currentPlayer);
 bool updateBoard(int choice, char symbol);
 int checkWin();
 bool checkDraw();
+void clearInputBuffer(); // Helper function to clear input buffer
 
 int main()
 {
-    gameInit();      // Initialize players and greet them
-    drawGameBoard(); // Draw the initial game board
-    playGame();      // Start the game
-    printf("\nThanks for playing!\n");
+    while (true)
+    {
+        gameInit();       // Initialize players and greet them
+        resetGameBoard(); // Reset the game board
+        drawGameBoard();  // Draw the initial game board
+        playGame();       // Start the game
+
+        // Ask if the players want to play again
+        char replay;
+        printf("\nDo you want to play again? (y/n): ");
+        scanf(" %c", &replay);
+        clearInputBuffer(); // Clear any leftover input
+
+        if (replay != 'y' && replay != 'Y')
+        {
+            printf("\nThanks for playing!\n");
+            break;
+        }
+    }
     return 0;
 }
 
@@ -45,6 +59,19 @@ void gameInit()
     printf("\n%s (X) vs %s (O), may the best player win!\n\n", player1, player2);
 }
 
+// Reset the game board for replay
+void resetGameBoard()
+{
+    int slot = 1;
+    for (int i = 0; i < BOARD_SIZE; i++)
+    {
+        for (int j = 0; j < BOARD_SIZE; j++)
+        {
+            gameBoard[i][j] = '0' + slot++; // Fill with numbers '1' to '9'
+        }
+    }
+}
+
 // Draw the game board
 void drawGameBoard()
 {
@@ -56,7 +83,7 @@ void drawGameBoard()
                gameBoard[i][0], gameBoard[i][1], gameBoard[i][2]);
         if (i < BOARD_SIZE - 1)
         {
-            printf("<*******><*******><*******>\n"); // Draw separators between rows
+            printf("<*******><*******><*******>\n"); // Draw row separators
         }
     }
     printf("<*******><*******><*******>\n\n");
@@ -76,7 +103,7 @@ void playGame()
     }
 }
 
-// Handle a player's turn
+// Handle a player's turn with input validation
 int playerTurn(int currentPlayer)
 {
     int choice;
@@ -87,7 +114,12 @@ int playerTurn(int currentPlayer)
     do
     {
         printf("\n(%c) %s's turn: ", symbol, playerName);
-        scanf("%d", &choice);
+        if (scanf("%d", &choice) != 1)
+        { // Check if input is a valid integer
+            printf("\nInvalid input. Please enter a number between 1 and 9.\n");
+            clearInputBuffer(); // Clear invalid input from buffer
+            continue;           // Retry the input
+        }
 
         if (choice < 1 || choice > TOTAL_SLOTS)
         {
@@ -96,7 +128,7 @@ int playerTurn(int currentPlayer)
         }
         else if (!updateBoard(choice, symbol))
         {
-            printf("\nSlot %d unavailable, try again!\n", choice);
+            printf("\nSlot %d is unavailable, try again!\n", choice);
         }
         else
         {
@@ -109,7 +141,7 @@ int playerTurn(int currentPlayer)
             }
             else if (checkDraw())
             {
-                printf("\n\nIt's a draw!\n");
+                printf("\nIt's a draw!\n");
                 return 1; // Game over, it's a draw
             }
         }
@@ -174,4 +206,14 @@ bool checkDraw()
         }
     }
     return true; // All slots are filled and no winner
+}
+
+// Helper function to clear the input buffer
+void clearInputBuffer()
+{
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF)
+    {
+        // Discard input until newline or end-of-file
+    }
 }
