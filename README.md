@@ -38,7 +38,7 @@ This is a **simple two-player Tic-Tac-Toe game** implemented in C. Players take 
 Open your terminal or command prompt, navigate to the project directory, and compile the code with:
 
 ```bash
-gcc -Wall -Wextra -o tictactoe tictactoe.c
+gcc -Wall -Wextra -o tictactoe main.c
 ```
 
 ### **Running the Game:**
