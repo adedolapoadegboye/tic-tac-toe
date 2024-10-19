@@ -162,13 +162,6 @@ Current Game Board:
 
 ---
 
-## **Known Issues**
-
-1. **No Replay Option:** After a game ends, the program exits. Players need to restart the game manually.
-2. **No Error Handling for Non-Integer Input:** If a player inputs a non-integer (e.g., a letter), the program may behave unexpectedly.
-
----
-
 ## **Future Improvements**
 
 1. **Add Replay Feature:** Allow players to start a new game without restarting the program.
