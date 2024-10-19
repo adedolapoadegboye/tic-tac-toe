@@ -185,11 +185,6 @@ If you'd like to contribute:
 4. Push to the branch: `git push origin feature-branch`.
 5. Open a pull request.
 
----
-
-## **Author**
-
-This project was developed by **[Your Name]** as a learning project. Feel free to reach out with any questions or feedback!
 
 ---
 
